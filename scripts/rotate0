@@ -1,2 +1,2 @@
 cd LCD-show/
-sudo ./rotate.sh 180
+sudo ./rotate.sh 0
