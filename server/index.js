@@ -38,7 +38,8 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(path.join(`${__dirname}/${DIST_DIR}`)));
-app.listen(PORT, "localhost", async () => {
+//app.listen(PORT, "localhost", async () => {
+app.listen(PORT, async () => {
   await open(`http://localhost:${PORT}`);
   console.log(`${appName} v${ver} has started on port ${PORT}`);
 });

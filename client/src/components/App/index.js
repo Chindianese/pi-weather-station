@@ -43,7 +43,7 @@ const App = () => {
             mouseHide ? "map-mouse-hide" : ""
           } ${darkMode ? "map-dark-mode" : ""}`}
         >
-          <WeatherMap zoom={9} dark={darkMode} />
+          <WeatherMap zoom={12} dark={darkMode} />
         </div>
         <div className={styles.infoContainer}>
           <InfoPanel />

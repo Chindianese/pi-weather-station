@@ -4,7 +4,7 @@
   min-width: 800px;
   min-height: 480px;
   display: grid;
-  grid-template-columns: auto 300px;
+  grid-template-columns: auto 250px;
   grid-template-rows: auto;
   grid-template-areas: "map info";
   user-select: none;

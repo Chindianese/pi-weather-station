@@ -23,7 +23,9 @@
 }
 
 .clock-container {
-  grid-area: clock;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 .weather-info-container {

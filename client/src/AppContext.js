@@ -38,7 +38,7 @@ export function AppContextProvider({ children }) {
   const [dailyWeatherDataErr, setDailyWeatherDataErr] = useState(null);
   const [dailyWeatherDataErrMsg, setDailyWeatherDataErrMsg] = useState(null);
   const [panToCoords, setPanToCoords] = useState(null);
-  const [markerIsVisible, setMarkerIsVisible] = useState(true);
+  const [markerIsVisible, setMarkerIsVisible] = useState(false);
   const [tempUnit, setTempUnit] = useState("f"); // fahrenheit or celsius
   const [speedUnit, setSpeedUnit] = useState("mph"); // mph or ms for m/s
   const [lengthUnit, setLengthUnit] = useState("in"); // in or mm

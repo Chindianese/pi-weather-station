@@ -11,7 +11,11 @@ import { AppContext } from "~/AppContext";
 import debounce from "debounce";
 import axios from "axios";
 import styles from "./styles.css";
+const helixPosition = [1.2864086982755834, 103.86027669621278]
+const wwpPosition = [1.4078599138570396, 103.90326730681771]
+const bishanSPPosition = [1.3461118639398442, 103.8472918001256]
 
+const markerOpacity = 0.6
 /**
  * Weather map
  *
@@ -163,6 +167,9 @@ const WeatherMap = ({ zoom, dark }) => {
       {markerIsVisible && markerPosition ? (
         <Marker position={markerPosition} opacity={0.65}></Marker>
       ) : null}
+        <Marker position={helixPosition} opacity={markerOpacity}></Marker>
+        <Marker position={wwpPosition} opacity={markerOpacity}></Marker>
+        <Marker position={bishanSPPosition} opacity={markerOpacity}></Marker>
     </Map>
   );
 };
