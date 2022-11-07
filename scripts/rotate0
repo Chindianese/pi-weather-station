@@ -1,0 +1,2 @@
+cd LCD-show/
+sudo ./rotate.sh 180
