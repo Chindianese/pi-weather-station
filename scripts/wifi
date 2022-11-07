@@ -1,2 +1,2 @@
 echo setting up wifi
-sudo python3 PiPager/wifi.py
+sudo python3 wifi.py
