@@ -140,8 +140,8 @@ const WeatherMap = ({ zoom, dark }) => {
       zoom={zoom}
       style={{ width: "100%", height: "100%" }}
       attributionControl={false}
-      touchZoom={true}
-      dragging={true}
+      touchZoom={false} // was true
+      dragging={false} // was true
       fadeAnimation={false}
       onClick={mapClickHandler}
     >
