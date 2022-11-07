@@ -15,7 +15,7 @@ def move_scripts():
     print("copying scripts to parent folder")
     __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
     src = os.path.join(__location__, '../scripts')
-    dst = os.path.join(__location__, '../')
+    dst = os.path.join(__location__, '../../')
     copytree(src, dst)
 
 move_scripts()
