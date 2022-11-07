@@ -2,6 +2,7 @@
     display: flex;
     justify-content: flex-end;    
     font-size: 25px;
+    font-weight: bold;
 }
 
 .time{
@@ -13,5 +14,4 @@
 .sun-rise-set-container{
     display: flex;
     justify-content: flex-end;
-    font-size: 20px; 
 }

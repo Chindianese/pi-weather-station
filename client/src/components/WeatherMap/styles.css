@@ -16,3 +16,9 @@
 .light {
   color: #3a393888;
 }
+
+.tooltip {
+  font-weight: bold;
+  padding: 1px;
+  font-size: 15px;
+}

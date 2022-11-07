@@ -5,7 +5,7 @@ import React, {
   useCallback,
   useRef,
 } from "react";
-import { Map, TileLayer, AttributionControl, Marker, Tooltip } from "react-leaflet";
+import { Map, TileLayer, AttributionControl, Marker } from "react-leaflet";
 import PropTypes from "prop-types";
 import { AppContext } from "~/AppContext";
 // import debounce from "debounce";
@@ -18,9 +18,9 @@ const nscPosition = [1.4109610716428875, 103.81573680422855]
 const buangsp = [1.382214673463887, 103.87946762487518]
 const stadiumPosition = [1.3063600233940178, 103.87460627334167]
 
-const markerOpacity = 0.4
-const labelOpacity = 0.4
-const offset = [0,0]
+const markerOpacity = 0.6
+// const labelOpacity = 1.0
+// const offset = [0,0]
 /**
  * Weather map
  *
@@ -175,15 +175,17 @@ const WeatherMap = ({ zoom, dark }) => {
       {markerIsVisible && markerPosition ? (
         <Marker position={markerPosition} opacity={0.65}></Marker>
       ) : null}
-        <Marker position={helixPosition} opacity={markerOpacity}> <Tooltip direction="bottom" offset={offset} opacity={labelOpacity} permanent>{"helix"}</Tooltip></Marker>
-        <Marker position={wwpPosition} opacity={markerOpacity}> <Tooltip direction="bottom" offset={offset} opacity={labelOpacity} permanent>{"wwp"}</Tooltip></Marker>
-        <Marker position={bishanSPPosition} opacity={markerOpacity}> <Tooltip direction="bottom" offset={offset} opacity={labelOpacity} permanent>{"bssp"}</Tooltip></Marker>
-        <Marker position={buangsp} opacity={markerOpacity}> <Tooltip direction="bottom" offset={offset} opacity={labelOpacity} permanent>{"bksp"}</Tooltip></Marker>
-        <Marker position={nscPosition} opacity={markerOpacity} >    <Tooltip direction="bottom" offset={offset} opacity={labelOpacity} permanent>{"nsc"}</Tooltip></Marker>
-        <Marker position={stadiumPosition} opacity={markerOpacity} >    <Tooltip direction="bottom" offset={offset} opacity={labelOpacity} permanent>{"stadium"}</Tooltip></Marker>
+        <Marker position={helixPosition} opacity={markerOpacity}> </Marker>
+        <Marker position={wwpPosition} opacity={markerOpacity}> </Marker>
+        <Marker position={bishanSPPosition} opacity={markerOpacity}> </Marker>
+        <Marker position={buangsp} opacity={markerOpacity}></Marker>
+        <Marker position={nscPosition} opacity={markerOpacity} > </Marker>
+        <Marker position={stadiumPosition} opacity={markerOpacity} ></Marker>
     </Map>
   );
 };
+
+{/* <Tooltip className={styles.tooltip} direction="bottom" offset={offset} opacity={labelOpacity} permanent>{"helix"}</Tooltip> */}
 
 WeatherMap.propTypes = {
   zoom: PropTypes.number.isRequired,
