@@ -144,6 +144,7 @@ const WeatherMap = ({ zoom, dark }) => {
       dragging={false} // was true
       fadeAnimation={false}
       onClick={null} // was mapClickHandler 
+      doubleClickZoom={false}
     >
       <AttributionControl position={"bottomleft"} />
       <TileLayer
