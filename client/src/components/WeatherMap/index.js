@@ -138,6 +138,8 @@ const WeatherMap = ({ zoom, dark }) => {
       ref={mapRef}
       center={[latitude, longitude]}
       zoom={zoom}
+      minZoom={zoom}
+      maxZoom={zoom}
       style={{ width: "100%", height: "100%" }}
       attributionControl={false}
       touchZoom={false} // was true
