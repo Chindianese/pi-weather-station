@@ -8,7 +8,7 @@ import React, {
 import { Map, TileLayer, AttributionControl, Marker } from "react-leaflet";
 import PropTypes from "prop-types";
 import { AppContext } from "~/AppContext";
-import debounce from "debounce";
+// import debounce from "debounce";
 import axios from "axios";
 import styles from "./styles.css";
 const helixPosition = [1.2864086982755834, 103.86027669621278]
@@ -25,9 +25,9 @@ const markerOpacity = 0.6
  * @returns {JSX.Element} Weather map
  */
 const WeatherMap = ({ zoom, dark }) => {
-  const MAP_CLICK_DEBOUNCE_TIME = 200; //ms
+  // const MAP_CLICK_DEBOUNCE_TIME = 200; //ms
   const {
-    setMapPosition,
+    //setMapPosition,
     panToCoords,
     setPanToCoords,
     browserGeo,
@@ -39,14 +39,14 @@ const WeatherMap = ({ zoom, dark }) => {
   } = useContext(AppContext);
   const mapRef = useRef();
 
-  const mapClickHandler = useCallback(
-    debounce((e) => {
-      const { lat: latitude, lng: longitude } = e.latlng;
-      const newCoords = { latitude, longitude };
-      setMapPosition(newCoords);
-    }, MAP_CLICK_DEBOUNCE_TIME),
-    [setMapPosition]
-  );
+  // const mapClickHandler = useCallback(
+  //   debounce((e) => {
+  //     const { lat: latitude, lng: longitude } = e.latlng;
+  //     const newCoords = { latitude, longitude };
+  //     setMapPosition(newCoords);
+  //   }, MAP_CLICK_DEBOUNCE_TIME),
+  //   [setMapPosition]
+  // );
 
   const [mapTimestamps, setMapTimestamps] = useState(null);
   const [mapTimestamp, setMapTimestamp] = useState(null);
@@ -143,7 +143,7 @@ const WeatherMap = ({ zoom, dark }) => {
       touchZoom={false} // was true
       dragging={false} // was true
       fadeAnimation={false}
-      onClick={mapClickHandler}
+      onClick={null} // was mapClickHandler 
     >
       <AttributionControl position={"bottomleft"} />
       <TileLayer
