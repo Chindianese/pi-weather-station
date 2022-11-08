@@ -4,7 +4,7 @@ import { AppContext } from "~/AppContext";
 import styles from "./styles.css";
 import LocationName from "~/components/LocationName";
 import CurrentWeather from "~/components/CurrentWeather";
-import DailyChart from "~/components/weatherCharts/DailyChart";
+// import DailyChart from "~/components/weatherCharts/DailyChart";
 import HourlyChart from "~/components/weatherCharts/HourlyChart";
 
 const CURRENT_WEATHER_DATA_UPDATE_INTERVAL = 10 * 60 * 1000; //every 10 minutes
@@ -156,9 +156,9 @@ const WeatherInfo = () => {
         <div className={styles.weatherChart}>
           <HourlyChart />
         </div>
-        <div className={styles.weatherChart}>
+        {/* <div className={styles.weatherChart}>
           <DailyChart />
-        </div>
+        </div> */}
       </div>
     );
   } else if (currentWeatherData || currentWeatherDataErr || err) {

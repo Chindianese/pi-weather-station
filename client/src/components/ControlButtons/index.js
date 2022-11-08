@@ -2,11 +2,11 @@ import React, { useContext } from "react";
 import { AppContext } from "~/AppContext";
 import styles from "./styles.css";
 import { InlineIcon } from "@iconify/react";
-import locationArrow from "@iconify/icons-map/location-arrow";
+// import locationArrow from "@iconify/icons-map/location-arrow";
 import contrastIcon from "@iconify/icons-carbon/contrast";
 import sharpSettings from "@iconify/icons-ic/sharp-settings";
-import roundLocationOn from "@iconify/icons-ic/round-location-on";
-import roundLocationOff from "@iconify/icons-ic/round-location-off";
+// import roundLocationOn from "@iconify/icons-ic/round-location-on";
+// import roundLocationOff from "@iconify/icons-ic/round-location-off";
 import playFilledAlt from "@iconify/icons-carbon/play-filled-alt";
 import stopFilledAlt from "@iconify/icons-carbon/stop-filled-alt";
 
@@ -19,9 +19,9 @@ const ControlButtons = () => {
   const {
     darkMode,
     setDarkMode,
-    resetMapPosition,
-    markerIsVisible,
-    toggleMarker,
+    // resetMapPosition,
+    // markerIsVisible,
+    // toggleMarker,
     toggleAnimateWeatherMap,
     animateWeatherMap,
     toggleSettingsMenuOpen,
@@ -35,14 +35,14 @@ const ControlButtons = () => {
         darkMode ? styles.dark : styles.light
       } ${!mouseHide ? styles.showMouse : ""}`}
     >
-      <div onClick={resetMapPosition}>
+      {/* <div onClick={resetMapPosition}>
         <InlineIcon icon={locationArrow} />
-      </div>
-      <div onClick={toggleMarker}>
+      </div> */}
+      {/* <div onClick={toggleMarker}>
         <InlineIcon
           icon={markerIsVisible ? roundLocationOff : roundLocationOn}
         />
-      </div>
+      </div> */}
       <div
         onClick={toggleAnimateWeatherMap}
         className={`${animateWeatherMap ? styles.buttonDown : ""}`}

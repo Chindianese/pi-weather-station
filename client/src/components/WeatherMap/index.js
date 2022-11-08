@@ -11,14 +11,14 @@ import { AppContext } from "~/AppContext";
 // import debounce from "debounce";
 import axios from "axios";
 import styles from "./styles.css";
-const helixPosition = [1.2864086982755834, 103.86027669621278]
-const wwpPosition = [1.4078599138570396, 103.90326730681771]
-const bishanSPPosition = [1.3461118639398442, 103.8472918001256]
-const nscPosition = [1.4109610716428875, 103.81573680422855]
-const buangsp = [1.382214673463887, 103.87946762487518]
-const stadiumPosition = [1.3063600233940178, 103.87460627334167]
+const helixPosition = [1.2864086982755834, 103.86027669621278];
+const wwpPosition = [1.4078599138570396, 103.90326730681771];
+const bishanSPPosition = [1.3461118639398442, 103.8472918001256];
+const nscPosition = [1.4109610716428875, 103.81573680422855];
+const buangsp = [1.382214673463887, 103.87946762487518];
+const stadiumPosition = [1.3063600233940178, 103.87460627334167];
 
-const markerOpacity = 0.6
+const markerOpacity = 0.6;
 // const labelOpacity = 1.0
 // const offset = [0,0]
 /**
@@ -57,8 +57,10 @@ const WeatherMap = ({ zoom, dark }) => {
   const [mapTimestamp, setMapTimestamp] = useState(null);
   const [currentMapTimestampIdx, setCurrentMapTimestampIdx] = useState(0);
 
-  const MAP_TIMESTAMP_REFRESH_FREQUENCY = 1000 * 60 * 10; //update every 10 minutes
-  const MAP_CYCLE_RATE = 1000; //ms
+  const MAP_TIMESTAMP_REFRESH_FREQUENCY = 1000 * 60 * 10; // update every 10 minutes
+  let MAP_CYCLE_RATE = 1000; //ms
+  let MAP_CYCLE_RATE_LAST = 5000; //ms
+  let currentMapCycle = MAP_CYCLE_RATE; //ms
 
   const getMapApiKeyCallback = useCallback(() => getMapApiKey(), [
     getMapApiKey,
@@ -105,23 +107,26 @@ const WeatherMap = ({ zoom, dark }) => {
       setMapTimestamp(mapTimestamps[currentMapTimestampIdx]);
     }
   }, [currentMapTimestampIdx, mapTimestamps]);
-
+  const updateAnimateMap = () =>
+  {
+    console.log('update')
+    let nextIdx;
+    if (currentMapTimestampIdx + 1 >= mapTimestamps.length) {
+      nextIdx = 0;
+    } else {
+      nextIdx = currentMapTimestampIdx + 1;
+    }
+    setCurrentMapTimestampIdx(nextIdx);
+  };
   // cycle through weather maps when animated is enabled
   useEffect(() => {
     if (mapTimestamps) {
       if (animateWeatherMap) {
-        const interval = setInterval(() => {
-          let nextIdx;
-          if (currentMapTimestampIdx + 1 >= mapTimestamps.length) {
-            nextIdx = 0;
-          } else {
-            nextIdx = currentMapTimestampIdx + 1;
-          }
-          setCurrentMapTimestampIdx(nextIdx);
-        }, MAP_CYCLE_RATE);
-        return () => {
-          clearInterval(interval);
-        };
+        setTimeout(updateAnimateMap, currentMapCycle);
+        if(currentMapTimestampIdx == mapTimestamps.length - 2) // second last frame
+          currentMapCycle = MAP_CYCLE_RATE_LAST;
+        else
+          currentMapCycle = MAP_CYCLE_RATE;
       } else {
         setCurrentMapTimestampIdx(mapTimestamps.length - 1);
       }
@@ -152,6 +157,7 @@ const WeatherMap = ({ zoom, dark }) => {
       fadeAnimation={false}
       onClick={null} // was mapClickHandler 
       doubleClickZoom={false}
+      zoomControl={false}
     >
       <AttributionControl position={"bottomleft"} />
       <TileLayer
