@@ -47,16 +47,16 @@ const ControlButtons = () => {
         onClick={toggleAnimateWeatherMap}
         className={`${animateWeatherMap ? styles.buttonDown : ""}`}
       >
-        <InlineIcon icon={animateWeatherMap ? stopFilledAlt : playFilledAlt} />
+        <InlineIcon icon={animateWeatherMap ? stopFilledAlt : playFilledAlt}  width={80} height={80} />
       </div>
       <div onClick={() => setDarkMode(!darkMode)}>
-        <InlineIcon icon={contrastIcon} />
+        <InlineIcon icon={contrastIcon}  width={80} height={80} />
       </div>
       <div
         onClick={toggleSettingsMenuOpen}
         className={`${settingsMenuOpen ? styles.buttonDown : ""}`}
       >
-        <InlineIcon icon={sharpSettings} />
+        <InlineIcon icon={sharpSettings}  width={80} height={80} />
       </div>
     </div>
   );

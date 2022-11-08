@@ -109,7 +109,6 @@ const WeatherMap = ({ zoom, dark }) => {
   }, [currentMapTimestampIdx, mapTimestamps]);
   const updateAnimateMap = () =>
   {
-    console.log('update')
     let nextIdx;
     if (currentMapTimestampIdx + 1 >= mapTimestamps.length) {
       nextIdx = 0;
@@ -122,11 +121,11 @@ const WeatherMap = ({ zoom, dark }) => {
   useEffect(() => {
     if (mapTimestamps) {
       if (animateWeatherMap) {
-        setTimeout(updateAnimateMap, currentMapCycle);
-        if(currentMapTimestampIdx == mapTimestamps.length - 2) // second last frame
+        if(currentMapTimestampIdx == mapTimestamps.length - 1) // second last frame
           currentMapCycle = MAP_CYCLE_RATE_LAST;
         else
           currentMapCycle = MAP_CYCLE_RATE;
+        setTimeout(updateAnimateMap, currentMapCycle);
       } else {
         setCurrentMapTimestampIdx(mapTimestamps.length - 1);
       }
