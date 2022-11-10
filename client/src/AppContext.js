@@ -180,6 +180,7 @@ export function AppContextProvider({ children }) {
               const { customWP1 } = res;
               if (customWP1) {
                 setCustomWP1(customWP1);
+                console.log()
               }
             }
             resolve(res);
@@ -219,6 +220,7 @@ export function AppContextProvider({ children }) {
    * @returns {Object} coords
    */
   function getBrowserGeo() {
+    getCustomWP1();
     return new Promise((resolve, reject) => {
       getCustomLatLon()
         .then((res) => {

@@ -11,12 +11,13 @@ import { AppContext } from "~/AppContext";
 // import debounce from "debounce";
 import axios from "axios";
 import styles from "./styles.css";
-const helixPosition = [1.2864086982755834, 103.86027669621278];
-const wwpPosition = [1.4078599138570396, 103.90326730681771];
-const bishanSPPosition = [1.3461118639398442, 103.8472918001256];
-const nscPosition = [1.4109610716428875, 103.81573680422855];
-const buangsp = [1.382214673463887, 103.87946762487518];
-const stadiumPosition = [1.3063600233940178, 103.87460627334167];
+// const helixPosition = [1.2864086982755834, 103.86027669621278];
+// const wwpPosition = [1.4078599138570396, 103.90326730681771];
+// const bishanSPPosition = [1.3461118639398442, 103.8472918001256];
+// const nscPosition = [1.4109610716428875, 103.81573680422855];
+// const buangsp = [1.382214673463887, 103.87946762487518];
+// const stadiumPosition = [1.3063600233940178, 103.87460627334167];
+
 
 const markerOpacity = 0.6;
 // const labelOpacity = 1.0
@@ -41,6 +42,7 @@ const WeatherMap = ({ zoom, dark }) => {
     getMapApiKey,
     markerIsVisible,
     animateWeatherMap,
+    customWP1,
   } = useContext(AppContext);
   const mapRef = useRef();
 
@@ -65,7 +67,16 @@ const WeatherMap = ({ zoom, dark }) => {
   const getMapApiKeyCallback = useCallback(() => getMapApiKey(), [
     getMapApiKey,
   ]);
-
+  function stringToWaypoint(customWPString)
+  {
+    let stringArray= customWPString.split(',');
+    let numberArray = [0,0];
+    numberArray[0] = parseFloat(stringArray[0]);
+    numberArray[1] = parseFloat(stringArray[1]);
+    if(isNaN(numberArray[0]) ||isNaN(numberArray[1]))
+      return null
+    return numberArray;
+  }
   useEffect(() => {
     getMapApiKeyCallback().catch((err) => {
       console.log("err!", err);
@@ -141,7 +152,6 @@ const WeatherMap = ({ zoom, dark }) => {
     );
   }
   const markerPosition = mapGeo ? [mapGeo.latitude, mapGeo.longitude] : null;
-
   return (
     <Map
       ref={mapRef}
@@ -180,12 +190,13 @@ const WeatherMap = ({ zoom, dark }) => {
       {markerIsVisible && markerPosition ? (
         <Marker position={markerPosition} opacity={0.65}></Marker>
       ) : null}
-        <Marker position={helixPosition} opacity={markerOpacity}> </Marker>
+       {customWP1 && stringToWaypoint(customWP1) ?  <Marker position={stringToWaypoint(customWP1)} opacity={markerOpacity}> </Marker>: null}
+        {/* <Marker position={helixPosition} opacity={markerOpacity}> </Marker>
         <Marker position={wwpPosition} opacity={markerOpacity}> </Marker>
         <Marker position={bishanSPPosition} opacity={markerOpacity}> </Marker>
         <Marker position={buangsp} opacity={markerOpacity}></Marker>
         <Marker position={nscPosition} opacity={markerOpacity} > </Marker>
-        <Marker position={stadiumPosition} opacity={markerOpacity} ></Marker>
+        <Marker position={stadiumPosition} opacity={markerOpacity} ></Marker> */}
     </Map>
   );
 };
