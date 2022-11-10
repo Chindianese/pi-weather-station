@@ -47,6 +47,7 @@ export function AppContextProvider({ children }) {
   const [settingsMenuOpen, setSettingsMenuOpen] = useState(false);
   const [customLat, setCustomLat] = useState(null);
   const [customLon, setCustomLon] = useState(null);
+  const [customWP1, setCustomWP1] = useState(null);
   const [mouseHide, setMouseHide] = useState(false);
   const [sunriseTime, setSunriseTime] = useState(null);
   const [sunsetTime, setSunsetTime] = useState(null);
@@ -165,6 +166,30 @@ export function AppContextProvider({ children }) {
         });
     });
   }
+   /**
+   * Set custom WP 1
+   *
+   * @returns {Promise} wp1
+   * @private
+   */
+    function getCustomWP1() {
+      return new Promise((resolve, reject) => {
+        getSettings()
+          .then((res) => {
+            if (res) {
+              const { customWP1 } = res;
+              if (customWP1) {
+                setCustomWP1(customWP1);
+              }
+            }
+            resolve(res);
+          })
+          .catch((err) => {
+            console.log("could not read settings.json", err);
+            reject(err);
+          });
+      });
+    }
 
   /**
    * Set the map to a given position
@@ -529,9 +554,10 @@ export function AppContextProvider({ children }) {
    * @param {String} [settings.geoKey]
    * @param {String} [settings.lat]
    * @param {String} [settings.lon]
+   * @param {String} [settings.wp1]
    * @returns {Promise} Resolves when complete
    */
-  function saveSettingsToJson({ mapsKey, weatherKey, geoKey, lat, lon }) {
+  function saveSettingsToJson({ mapsKey, weatherKey, geoKey, lat, lon, wp1 }) {
     return new Promise((resolve, reject) => {
       axios
         .put("/settings", {
@@ -540,6 +566,7 @@ export function AppContextProvider({ children }) {
           reverseGeoApiKey: geoKey,
           startingLat: lat,
           startingLon: lon,
+          customWP1: wp1
         })
         .then((res) => {
           resolve(res);
@@ -548,6 +575,7 @@ export function AppContextProvider({ children }) {
           setReverseGeoApiKey(geoKey);
           setCustomLat(lat);
           setCustomLon(lon);
+          setCustomWP1(wp1);
         })
         .catch((err) => {
           reject(err);
@@ -586,8 +614,10 @@ export function AppContextProvider({ children }) {
     setSettingsMenuOpen,
     toggleSettingsMenuOpen,
     getCustomLatLon,
+    getCustomWP1,
     customLat,
     customLon,
+    customWP1,
     loadStoredData,
     clockTime,
     saveClockTime,
