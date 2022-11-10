@@ -182,7 +182,7 @@ export function AppContextProvider({ children }) {
         getSettings()
           .then((res) => {
             if (res) {
-              const { customWP1, customWP2, customWP3, customWP4, customWP5} = res;
+              const { customWP1, customWP2, customWP3, customWP4, customWP5, customWP6} = res;
               if (customWP1) {
                 setCustomWP1(customWP1);
               }
@@ -199,7 +199,7 @@ export function AppContextProvider({ children }) {
                 setCustomWP5(customWP5);
               }
               if (customWP6) {
-                setCustomWP5(customWP6);
+                setCustomWP6(customWP6);
               }
             }
             resolve(res);
@@ -579,13 +579,13 @@ export function AppContextProvider({ children }) {
    * @param {String} [settings.wp2]
    * @returns {Promise} Resolves when complete
    */
-  function saveSettingsToJson({ mapsKey, weatherKey, geoKey, lat, lon, wp1, wp2,wp3, wp4,wp5, wp6}) {
+  function saveSettingsToJson({ mapsKey, weatherKey, lat, lon, wp1, wp2,wp3, wp4,wp5, wp6}) {
     return new Promise((resolve, reject) => {
       axios
         .put("/settings", {
           weatherApiKey: weatherKey,
           mapApiKey: mapsKey,
-          reverseGeoApiKey: geoKey,
+          // reverseGeoApiKey: geoKey,
           startingLat: lat,
           startingLon: lon,
           customWP1: wp1,
@@ -593,13 +593,13 @@ export function AppContextProvider({ children }) {
           customWP3: wp3,
           customWP4: wp4,
           customWP5: wp5,
-          customWP5: wp6,
+          customWP6: wp6,
         })
         .then((res) => {
           resolve(res);
           setMapApiKey(mapsKey);
           setWeatherApiKey(weatherKey);
-          setReverseGeoApiKey(geoKey);
+          // setReverseGeoApiKey(geoKey);
           setCustomLat(lat);
           setCustomLon(lon);
           setCustomWP1(wp1);

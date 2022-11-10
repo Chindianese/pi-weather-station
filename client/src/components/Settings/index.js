@@ -20,7 +20,7 @@ const Settings = () => {
     settingsMenuOpen,
     weatherApiKey,
     mapApiKey,
-    reverseGeoApiKey,
+    // reverseGeoApiKey,
     customLat,
     customLon,
     customWP1,
@@ -36,7 +36,7 @@ const Settings = () => {
 
   const [mapsKey, setMapsKey] = useState(null);
   const [weatherKey, setWeatherKey] = useState(null);
-  const [geoKey, setGeoKey] = useState(null);
+  // const [geoKey, setGeoKey] = useState(null);
   const [lat, setLat] = useState(null);
   const [lon, setLon] = useState(null);
   const [wp1, setWP1] = useState(null);
@@ -48,7 +48,7 @@ const Settings = () => {
 
   const [currentMapsKey, setCurrentMapsKey] = useState(null);
   const [currentWeatherKey, setCurrentWeatherKey] = useState(null);
-  const [currentGeoKey, setCurrentGeoKey] = useState(null);
+  // const [currentGeoKey, setCurrentGeoKey] = useState(null);
   const [currentLat, setCurrentLat] = useState(null);
   const [currentLon, setCurrentLon] = useState(null);
   const [currentWP1, setCurrentWP1] = useState(null);
@@ -61,7 +61,7 @@ const Settings = () => {
   useEffect(() => {
     setCurrentMapsKey(mapApiKey);
     setCurrentWeatherKey(weatherApiKey);
-    setCurrentGeoKey(reverseGeoApiKey);
+    // setCurrentGeoKey(reverseGeoApiKey);
     setCurrentLat(customLat);
     setCurrentLon(customLon);
     setCurrentWP1(customWP1);
@@ -73,7 +73,7 @@ const Settings = () => {
   }, [
     mapApiKey,
     weatherApiKey,
-    reverseGeoApiKey,
+    // reverseGeoApiKey,
     customLat,
     customLon,
     customWP1,
@@ -82,7 +82,7 @@ const Settings = () => {
     customWP4,
     customWP5,
     customWP6,
-    currentGeoKey,
+    // currentGeoKey,
     mouseHide,
     saveMouseHide,
   ]);
@@ -94,9 +94,9 @@ const Settings = () => {
     if (weatherApiKey) {
       setWeatherKey(weatherApiKey);
     }
-    if (reverseGeoApiKey) {
-      setGeoKey(reverseGeoApiKey);
-    }
+    // if (reverseGeoApiKey) {
+    //   setGeoKey(reverseGeoApiKey);
+    // }
     if (customLat) {
       setLat(customLat);
     }
@@ -121,7 +121,7 @@ const Settings = () => {
     if (customWP6) {
       setWP6(customWP6);
     }
-  }, [mapApiKey, weatherApiKey, reverseGeoApiKey, customLon, customLat, 
+  }, [mapApiKey, weatherApiKey, customLon, customLat, 
     customWP1, customWP2, customWP3, customWP4, customWP5, customWP6]);
 
   return (
@@ -157,12 +157,12 @@ const Settings = () => {
             cb={setWeatherKey}
             required={true}
           />
-          <Input
+          {/* <Input
             label={"GEOLOCATION API KEY"}
             val={geoKey}
             current={currentGeoKey}
             cb={setGeoKey}
-          />
+          /> */}
           <Input
             label={"CUSTOM STARTING LATITUDE"}
             val={lat}
@@ -227,7 +227,6 @@ const Settings = () => {
               <SaveButton
                 mapsKey={mapsKey}
                 weatherKey={weatherKey}
-                geoKey={geoKey}
                 lat={lat}
                 lon={lon}
                 wp1={wp1}
@@ -253,7 +252,7 @@ export default Settings;
  * @param {Object} props
  * @param {String} [props.mapsKey]
  * @param {String} [props.weatherKey]
- * @param {String} [props.geoKey]
+//  * @param {String} [props.geoKey]
  * @param {String} [props.lat]
  * @param {String} [props.lon]
  * @param {String} [props.wp1]
@@ -264,7 +263,7 @@ export default Settings;
  * @param {String} [props.wp6]
  * @returns {JSX.Element} Save button
  */
-const SaveButton = ({ mapsKey, weatherKey, geoKey, lat, lon, wp1, wp2, wp3, wp4, wp5, wp6}) => {
+const SaveButton = ({ mapsKey, weatherKey, lat, lon, wp1, wp2, wp3, wp4, wp5, wp6}) => {
   const { saveSettingsToJson, setSettingsMenuOpen, mouseHide } = useContext(
     AppContext
   );
@@ -274,7 +273,7 @@ const SaveButton = ({ mapsKey, weatherKey, geoKey, lat, lon, wp1, wp2, wp3, wp4,
         !mouseHide ? styles.showMouse : ""
       }`}
       onClick={() => {
-        saveSettingsToJson({ mapsKey, weatherKey, geoKey, lat, lon, wp1, wp2, wp3, wp4, wp5, wp6})
+        saveSettingsToJson({ mapsKey, weatherKey, lat, lon, wp1, wp2, wp3, wp4, wp5, wp6})
           .then(() => {
             setSettingsMenuOpen(false);
           })
@@ -294,7 +293,7 @@ const SaveButton = ({ mapsKey, weatherKey, geoKey, lat, lon, wp1, wp2, wp3, wp4,
 SaveButton.propTypes = {
   mapsKey: PropTypes.string,
   weatherKey: PropTypes.string,
-  geoKey: PropTypes.string,
+  // geoKey: PropTypes.string,
   lat: PropTypes.string,
   lon: PropTypes.string,
   wp1:PropTypes.string,
