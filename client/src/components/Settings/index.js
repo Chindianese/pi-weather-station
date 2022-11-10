@@ -24,6 +24,11 @@ const Settings = () => {
     customLat,
     customLon,
     customWP1,
+    customWP2,
+    customWP3,
+    customWP4,
+    customWP5,
+    customWP6,
     setSettingsMenuOpen,
     mouseHide,
     saveMouseHide,
@@ -35,6 +40,11 @@ const Settings = () => {
   const [lat, setLat] = useState(null);
   const [lon, setLon] = useState(null);
   const [wp1, setWP1] = useState(null);
+  const [wp2, setWP2] = useState(null);
+  const [wp3, setWP3] = useState(null);
+  const [wp4, setWP4] = useState(null);
+  const [wp5, setWP5] = useState(null);
+  const [wp6, setWP6] = useState(null);
 
   const [currentMapsKey, setCurrentMapsKey] = useState(null);
   const [currentWeatherKey, setCurrentWeatherKey] = useState(null);
@@ -42,6 +52,11 @@ const Settings = () => {
   const [currentLat, setCurrentLat] = useState(null);
   const [currentLon, setCurrentLon] = useState(null);
   const [currentWP1, setCurrentWP1] = useState(null);
+  const [currentWP2, setCurrentWP2] = useState(null);
+  const [currentWP3, setCurrentWP3] = useState(null);
+  const [currentWP4, setCurrentWP4] = useState(null);
+  const [currentWP5, setCurrentWP5] = useState(null);
+  const [currentWP6, setCurrentWP6] = useState(null);
 
   useEffect(() => {
     setCurrentMapsKey(mapApiKey);
@@ -50,6 +65,11 @@ const Settings = () => {
     setCurrentLat(customLat);
     setCurrentLon(customLon);
     setCurrentWP1(customWP1);
+    setCurrentWP2(customWP2);
+    setCurrentWP3(customWP3);
+    setCurrentWP4(customWP4);
+    setCurrentWP5(customWP5);
+    setCurrentWP6(customWP6);
   }, [
     mapApiKey,
     weatherApiKey,
@@ -57,6 +77,11 @@ const Settings = () => {
     customLat,
     customLon,
     customWP1,
+    customWP2,
+    customWP3,
+    customWP4,
+    customWP5,
+    customWP6,
     currentGeoKey,
     mouseHide,
     saveMouseHide,
@@ -81,7 +106,23 @@ const Settings = () => {
     if (customWP1) {
       setWP1(customWP1);
     }
-  }, [mapApiKey, weatherApiKey, reverseGeoApiKey, customLon, customLat, customWP1]);
+    if (customWP2) {
+      setWP2(customWP2);
+    }
+    if (customWP3) {
+      setWP3(customWP3);
+    }
+    if (customWP4) {
+      setWP4(customWP4);
+    }
+    if (customWP5) {
+      setWP5(customWP5);
+    }
+    if (customWP6) {
+      setWP6(customWP6);
+    }
+  }, [mapApiKey, weatherApiKey, reverseGeoApiKey, customLon, customLat, 
+    customWP1, customWP2, customWP3, customWP4, customWP5, customWP6]);
 
   return (
     <CSSTransition
@@ -134,11 +175,41 @@ const Settings = () => {
             cb={setLon}
             current={currentLon}
           />
-            <Input
+        <Input
             label={"WAYPOINT 1"}
             val={wp1}
             cb={setWP1}
             current={currentWP1}
+          />
+            <Input
+            label={"WAYPOINT 2"}
+            val={wp2}
+            cb={setWP2}
+            current={currentWP2}
+          />
+            <Input
+            label={"WAYPOINT 3"}
+            val={wp3}
+            cb={setWP3}
+            current={currentWP3}
+          />
+            <Input
+            label={"WAYPOINT 4"}
+            val={wp4}
+            cb={setWP4}
+            current={currentWP4}
+          />
+            <Input
+            label={"WAYPOINT 5"}
+            val={wp5}
+            cb={setWP5}
+            current={currentWP5}
+          />
+            <Input
+            label={"WAYPOINT 6"}
+            val={wp6}
+            cb={setWP6}
+            current={currentWP6}
           />
           <div className={styles.bottomButtonContainer}>
             <div>
@@ -160,6 +231,11 @@ const Settings = () => {
                 lat={lat}
                 lon={lon}
                 wp1={wp1}
+                wp2={wp2}
+                wp3={wp3}
+                wp4={wp4}
+                wp5={wp5}
+                wp6={wp6}
               />
             </div>
           </div>
@@ -181,9 +257,14 @@ export default Settings;
  * @param {String} [props.lat]
  * @param {String} [props.lon]
  * @param {String} [props.wp1]
+ * @param {String} [props.wp2]
+ * @param {String} [props.wp3]
+ * @param {String} [props.wp4]
+ * @param {String} [props.wp5]
+ * @param {String} [props.wp6]
  * @returns {JSX.Element} Save button
  */
-const SaveButton = ({ mapsKey, weatherKey, geoKey, lat, lon, wp1}) => {
+const SaveButton = ({ mapsKey, weatherKey, geoKey, lat, lon, wp1, wp2, wp3, wp4, wp5, wp6}) => {
   const { saveSettingsToJson, setSettingsMenuOpen, mouseHide } = useContext(
     AppContext
   );
@@ -193,7 +274,7 @@ const SaveButton = ({ mapsKey, weatherKey, geoKey, lat, lon, wp1}) => {
         !mouseHide ? styles.showMouse : ""
       }`}
       onClick={() => {
-        saveSettingsToJson({ mapsKey, weatherKey, geoKey, lat, lon, wp1 })
+        saveSettingsToJson({ mapsKey, weatherKey, geoKey, lat, lon, wp1, wp2, wp3, wp4, wp5, wp6})
           .then(() => {
             setSettingsMenuOpen(false);
           })
@@ -216,7 +297,12 @@ SaveButton.propTypes = {
   geoKey: PropTypes.string,
   lat: PropTypes.string,
   lon: PropTypes.string,
-  wp1:PropTypes.string
+  wp1:PropTypes.string,
+  wp2:PropTypes.string,
+  wp3:PropTypes.string,
+  wp4:PropTypes.string,
+  wp5:PropTypes.string,
+  wp6:PropTypes.string,
 };
 
 /**

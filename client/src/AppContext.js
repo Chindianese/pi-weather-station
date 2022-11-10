@@ -48,6 +48,11 @@ export function AppContextProvider({ children }) {
   const [customLat, setCustomLat] = useState(null);
   const [customLon, setCustomLon] = useState(null);
   const [customWP1, setCustomWP1] = useState(null);
+  const [customWP2, setCustomWP2] = useState(null);
+  const [customWP3, setCustomWP3] = useState(null);
+  const [customWP4, setCustomWP4] = useState(null);
+  const [customWP5, setCustomWP5] = useState(null);
+  const [customWP6, setCustomWP6] = useState(null);
   const [mouseHide, setMouseHide] = useState(false);
   const [sunriseTime, setSunriseTime] = useState(null);
   const [sunsetTime, setSunsetTime] = useState(null);
@@ -172,15 +177,29 @@ export function AppContextProvider({ children }) {
    * @returns {Promise} wp1
    * @private
    */
-    function getCustomWP1() {
+    function getCustomWaypoints() {
       return new Promise((resolve, reject) => {
         getSettings()
           .then((res) => {
             if (res) {
-              const { customWP1 } = res;
+              const { customWP1, customWP2, customWP3, customWP4, customWP5} = res;
               if (customWP1) {
                 setCustomWP1(customWP1);
-                console.log()
+              }
+              if (customWP2) {
+                setCustomWP2(customWP2);
+              }
+              if (customWP3) {
+                setCustomWP3(customWP3);
+              }
+              if (customWP4) {
+                setCustomWP4(customWP4);
+              }
+              if (customWP5) {
+                setCustomWP5(customWP5);
+              }
+              if (customWP6) {
+                setCustomWP5(customWP6);
               }
             }
             resolve(res);
@@ -220,7 +239,7 @@ export function AppContextProvider({ children }) {
    * @returns {Object} coords
    */
   function getBrowserGeo() {
-    getCustomWP1();
+    getCustomWaypoints();
     return new Promise((resolve, reject) => {
       getCustomLatLon()
         .then((res) => {
@@ -557,9 +576,10 @@ export function AppContextProvider({ children }) {
    * @param {String} [settings.lat]
    * @param {String} [settings.lon]
    * @param {String} [settings.wp1]
+   * @param {String} [settings.wp2]
    * @returns {Promise} Resolves when complete
    */
-  function saveSettingsToJson({ mapsKey, weatherKey, geoKey, lat, lon, wp1 }) {
+  function saveSettingsToJson({ mapsKey, weatherKey, geoKey, lat, lon, wp1, wp2,wp3, wp4,wp5, wp6}) {
     return new Promise((resolve, reject) => {
       axios
         .put("/settings", {
@@ -568,7 +588,12 @@ export function AppContextProvider({ children }) {
           reverseGeoApiKey: geoKey,
           startingLat: lat,
           startingLon: lon,
-          customWP1: wp1
+          customWP1: wp1,
+          customWP2: wp2,
+          customWP3: wp3,
+          customWP4: wp4,
+          customWP5: wp5,
+          customWP5: wp6,
         })
         .then((res) => {
           resolve(res);
@@ -578,6 +603,11 @@ export function AppContextProvider({ children }) {
           setCustomLat(lat);
           setCustomLon(lon);
           setCustomWP1(wp1);
+          setCustomWP2(wp2);
+          setCustomWP3(wp3);
+          setCustomWP4(wp4);
+          setCustomWP5(wp5);
+          setCustomWP6(wp6);
         })
         .catch((err) => {
           reject(err);
@@ -616,10 +646,14 @@ export function AppContextProvider({ children }) {
     setSettingsMenuOpen,
     toggleSettingsMenuOpen,
     getCustomLatLon,
-    getCustomWP1,
     customLat,
     customLon,
     customWP1,
+    customWP2,
+    customWP3,
+    customWP4,
+    customWP5,
+    customWP6,
     loadStoredData,
     clockTime,
     saveClockTime,

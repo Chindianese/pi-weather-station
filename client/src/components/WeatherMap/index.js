@@ -43,6 +43,11 @@ const WeatherMap = ({ zoom, dark }) => {
     markerIsVisible,
     animateWeatherMap,
     customWP1,
+    customWP2,
+    customWP3,
+    customWP4,
+    customWP5,
+    customWP6,
   } = useContext(AppContext);
   const mapRef = useRef();
 
@@ -70,11 +75,11 @@ const WeatherMap = ({ zoom, dark }) => {
   function stringToWaypoint(customWPString)
   {
     let stringArray= customWPString.split(',');
-    let numberArray = [0,0];
+    let numberArray = [0, 0];
     numberArray[0] = parseFloat(stringArray[0]);
     numberArray[1] = parseFloat(stringArray[1]);
     if(isNaN(numberArray[0]) ||isNaN(numberArray[1]))
-      return null
+      return null;
     return numberArray;
   }
   useEffect(() => {
@@ -191,6 +196,11 @@ const WeatherMap = ({ zoom, dark }) => {
         <Marker position={markerPosition} opacity={0.65}></Marker>
       ) : null}
        {customWP1 && stringToWaypoint(customWP1) ?  <Marker position={stringToWaypoint(customWP1)} opacity={markerOpacity}> </Marker>: null}
+       {customWP2 && stringToWaypoint(customWP2) ?  <Marker position={stringToWaypoint(customWP2)} opacity={markerOpacity}> </Marker>: null}
+       {customWP3 && stringToWaypoint(customWP3) ?  <Marker position={stringToWaypoint(customWP3)} opacity={markerOpacity}> </Marker>: null}
+       {customWP4 && stringToWaypoint(customWP4) ?  <Marker position={stringToWaypoint(customWP4)} opacity={markerOpacity}> </Marker>: null}
+       {customWP5 && stringToWaypoint(customWP5) ?  <Marker position={stringToWaypoint(customWP5)} opacity={markerOpacity}> </Marker>: null}
+       {customWP6 && stringToWaypoint(customWP6) ?  <Marker position={stringToWaypoint(customWP6)} opacity={markerOpacity}> </Marker>: null}
         {/* <Marker position={helixPosition} opacity={markerOpacity}> </Marker>
         <Marker position={wwpPosition} opacity={markerOpacity}> </Marker>
         <Marker position={bishanSPPosition} opacity={markerOpacity}> </Marker>
