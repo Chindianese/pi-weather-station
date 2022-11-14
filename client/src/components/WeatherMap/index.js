@@ -48,6 +48,8 @@ const WeatherMap = ({ zoom, dark }) => {
     customWP4,
     customWP5,
     customWP6,
+    mapTimestamp,
+    setMapTimestamp
   } = useContext(AppContext);
   const mapRef = useRef();
 
@@ -61,7 +63,7 @@ const WeatherMap = ({ zoom, dark }) => {
   // );
 
   const [mapTimestamps, setMapTimestamps] = useState(null);
-  const [mapTimestamp, setMapTimestamp] = useState(null);
+
   const [currentMapTimestampIdx, setCurrentMapTimestampIdx] = useState(0);
 
   const MAP_TIMESTAMP_REFRESH_FREQUENCY = 1000 * 60 * 10; // update every 10 minutes
