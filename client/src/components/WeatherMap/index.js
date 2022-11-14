@@ -91,6 +91,7 @@ const WeatherMap = ({ zoom, dark }) => {
       getMapTimestamps()
         .then((res) => {
           setMapTimestamps(res);
+          console.log("updated timestamps");
         })
         .catch((err) => {
           console.log("err", err);
@@ -103,7 +104,7 @@ const WeatherMap = ({ zoom, dark }) => {
     );
     updateTimeStamps(); //initial update
     return () => {
-      clearInterval(mapTimestampsInterval);
+      clearTimeout(mapTimestampsInterval);
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -131,6 +132,7 @@ const WeatherMap = ({ zoom, dark }) => {
     } else {
       nextIdx = currentMapTimestampIdx + 1;
     }
+    console.log("map index: " + nextIdx);
     setCurrentMapTimestampIdx(nextIdx);
   };
   // cycle through weather maps when animated is enabled
