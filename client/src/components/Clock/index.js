@@ -12,7 +12,9 @@ import SunRiseSet from "~/components/SunRiseSet";
 const Clock = () => {
   const { clockTime } = useContext(AppContext);
   const [date, setDate] = useState(new Date().getTime());
-
+  const {
+    mapTimestamp,
+  } = useContext(AppContext);
   useEffect(() => {
     const clockInterval = setInterval(() => {
       setDate(new Date().getTime());
@@ -28,7 +30,8 @@ const Clock = () => {
         {format(date, "cccc").toUpperCase()}{" "}
         {format(date, "LLLL").toUpperCase()} {format(date, "d")}
       </div>
-      <div className={styles.time}>{format(date, clockTime === "12" ? "p" : "HH:mm")}</div>
+      {/* <div className={styles.time}>{format(date, clockTime === "12" ? "p" : "HH:mm")}</div> */}
+      <div className={styles.time}>{format(mapTimestamp*1000, clockTime === "12" ? "p" : "HH:mm")}</div>
       <div className={styles.sunRiseSetContainer}>
         <SunRiseSet/>
       </div>

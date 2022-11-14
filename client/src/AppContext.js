@@ -56,7 +56,7 @@ export function AppContextProvider({ children }) {
   const [mouseHide, setMouseHide] = useState(false);
   const [sunriseTime, setSunriseTime] = useState(null);
   const [sunsetTime, setSunsetTime] = useState(null);
-
+  const [mapTimestamp, setMapTimestamp] = useState(null);
   /**
    * Save mouse hide state
    *
@@ -675,6 +675,8 @@ export function AppContextProvider({ children }) {
     updateSunriseSunset,
     sunriseTime,
     sunsetTime,
+    mapTimestamp,
+    setMapTimestamp,
   };
 
   return (
