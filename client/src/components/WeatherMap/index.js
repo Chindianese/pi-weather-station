@@ -106,7 +106,7 @@ const WeatherMap = ({ zoom, dark }) => {
     );
     updateTimeStamps(); //initial update
     return () => {
-      clearTimeout(mapTimestampsInterval);
+      clearInterval(mapTimestampsInterval);
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -128,6 +128,8 @@ const WeatherMap = ({ zoom, dark }) => {
   }, [currentMapTimestampIdx, mapTimestamps]);
   const updateAnimateMap = () =>
   {
+    if(!animateWeatherMap)
+    return;
     let nextIdx;
     if (currentMapTimestampIdx + 1 >= mapTimestamps.length) {
       nextIdx = 0;
@@ -139,17 +141,27 @@ const WeatherMap = ({ zoom, dark }) => {
   };
   // cycle through weather maps when animated is enabled
   useEffect(() => {
+    console.log("Use effect")
+    let mapTimestampTimeout = null;
     if (mapTimestamps) {
       if (animateWeatherMap) {
         if(currentMapTimestampIdx == mapTimestamps.length - 1) // second last frame
           currentMapCycle = MAP_CYCLE_RATE_LAST;
         else
           currentMapCycle = MAP_CYCLE_RATE;
-        setTimeout(updateAnimateMap, currentMapCycle);
+        console.log("set timeout")
+        mapTimestampTimeout = setTimeout(updateAnimateMap, currentMapCycle);
       } else {
         setCurrentMapTimestampIdx(mapTimestamps.length - 1);
       }
     }
+    return () => {
+      if(mapTimestampTimeout)
+      {
+        console.log("clear timeout")
+        clearTimeout(mapTimestampTimeout);
+      }
+    };
   }, [currentMapTimestampIdx, animateWeatherMap, mapTimestamps]);
 
   if (!hasVal(latitude) || !hasVal(longitude) || !zoom || !mapApiKey) {
