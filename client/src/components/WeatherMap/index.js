@@ -125,7 +125,7 @@ const WeatherMap = ({ zoom, dark }) => {
     if (mapTimestamps) {
       setMapTimestamp(mapTimestamps[currentMapTimestampIdx]);
     }
-  }, [currentMapTimestampIdx, mapTimestamps]);
+  }, [currentMapTimestampIdx, mapTimestamps, setMapTimestamp]);
   const updateAnimateMap = () =>
   {
     if(!animateWeatherMap)
@@ -141,16 +141,17 @@ const WeatherMap = ({ zoom, dark }) => {
   };
   // cycle through weather maps when animated is enabled
   useEffect(() => {
-    console.log("Use effect")
+    console.log("Use effect");
     let mapTimestampTimeout = null;
+    let mapCycleTime = currentMapCycle;
     if (mapTimestamps) {
       if (animateWeatherMap) {
         if(currentMapTimestampIdx == mapTimestamps.length - 1) // second last frame
-          currentMapCycle = MAP_CYCLE_RATE_LAST;
+        mapCycleTime = MAP_CYCLE_RATE_LAST;
         else
-          currentMapCycle = MAP_CYCLE_RATE;
-        console.log("set timeout")
-        mapTimestampTimeout = setTimeout(updateAnimateMap, currentMapCycle);
+        mapCycleTime = MAP_CYCLE_RATE;
+        console.log("set timeout");
+        mapTimestampTimeout = setTimeout(updateAnimateMap, mapCycleTime);
       } else {
         setCurrentMapTimestampIdx(mapTimestamps.length - 1);
       }
@@ -158,11 +159,11 @@ const WeatherMap = ({ zoom, dark }) => {
     return () => {
       if(mapTimestampTimeout)
       {
-        console.log("clear timeout")
+        console.log("clear timeout");
         clearTimeout(mapTimestampTimeout);
       }
     };
-  }, [currentMapTimestampIdx, animateWeatherMap, mapTimestamps]);
+  }, [currentMapTimestampIdx, animateWeatherMap, mapTimestamps, MAP_CYCLE_RATE, MAP_CYCLE_RATE_LAST, currentMapCycle]);
 
   if (!hasVal(latitude) || !hasVal(longitude) || !zoom || !mapApiKey) {
     return (
@@ -204,8 +205,8 @@ const WeatherMap = ({ zoom, dark }) => {
           opacity={0.3}
           size={512}
           color={6} // https://www.rainviewer.com/api.html#colorSchemes
-          smooth={1}
-          snow={1}
+          smooth={1.0}
+          snow={0}
         />
       ) : null}
       {markerIsVisible && markerPosition ? (
