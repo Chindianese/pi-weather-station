@@ -203,7 +203,7 @@ const WeatherMap = ({ zoom, dark }) => {
           attribution='<a href="https://www.rainviewer.com/">RainViewer</a>'
           url={`https://tilecache.rainviewer.com/v2/radar/${mapTimestamp}/{size}/{z}/{x}/{y}/{color}/{smooth}_{snow}.png`}
           opacity={0.3}
-          size={512}
+          size={256}
           color={6} // https://www.rainviewer.com/api.html#colorSchemes
           smooth={1.0}
           snow={0}
