@@ -68,8 +68,8 @@ const WeatherMap = ({ zoom, dark }) => {
   const [currentMapTimestampIdx, setCurrentMapTimestampIdx] = useState(0);
 
   const MAP_TIMESTAMP_REFRESH_FREQUENCY = 1000 * 60 * 10; // update every 10 minutes
-  let MAP_CYCLE_RATE = 2000; //ms
-  let MAP_CYCLE_RATE_LAST = 6000; //ms
+  let MAP_CYCLE_RATE = 5000; //ms
+  let MAP_CYCLE_RATE_LAST = 7000; //ms
   let currentMapCycle = MAP_CYCLE_RATE; //ms
 
   const getMapApiKeyCallback = useCallback(() => getMapApiKey(), [
